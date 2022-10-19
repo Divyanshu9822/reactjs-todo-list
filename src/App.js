@@ -13,15 +13,15 @@ import TodoContext from "./context/TodoContext";
 import { TodoContextProvider } from "./context/TodoContext";
 
 function App() {
-
-  const { todos, setTodos } = useContext(TodoContext);
+  const { todos, setTodos} = useContext(TodoContext);
+  
   useEffect(() => {
-    const todosStored = JSON.parse(localStorage.getItem('TODO_KEY'));
-    if (todosStored) { setTodos(todosStored) }
+    const todosStored = JSON.parse(window.localStorage.getItem('key'));
+    if (todosStored !== null) { setTodos(todosStored) }
   }, [])
-
+  
   useEffect(() => {
-    localStorage.setItem('TODO_KEY', JSON.stringify(todos));
+    localStorage.setItem('key', JSON.stringify(todos));
   }, [todos])
 
 
@@ -29,7 +29,7 @@ function App() {
     <TodoContextProvider>
       <div className="App">
         <Router>
-          <Navbar />
+        <Navbar />
           <Routes>
             <Route exact path="/" element={
               <>
